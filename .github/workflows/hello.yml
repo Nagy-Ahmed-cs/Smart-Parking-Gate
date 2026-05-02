@@ -1,13 +1,22 @@
-name: Hello Agile
-on:
-  push:
-    branches: [ dev ]
-  pull_request:
-    branches: [ main ]
+name: Action Basics Demo
+on: [push]
 
 jobs:
-  say_hello:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Print Hello
-        run: echo "Hello from GitHub Actions!"
+      - name: Echo String
+        run: echo "Welcome to GitHub Actions!"
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Run Python Commands
+        run: |
+          echo "---"
+          python --version
+          python -c "print('Hello from Python!')"
+          python -c "for i in range(3): print(f'Counting {i+1}')"
+          echo "---"
